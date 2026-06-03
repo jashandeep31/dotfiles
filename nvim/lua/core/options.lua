@@ -17,6 +17,7 @@ opt.hidden = true
 opt.swapfile = false
 opt.backup = false
 opt.undodir = vim.fn.stdpath("config") .. "/undo"
+vim.fn.mkdir(opt.undodir:value(), "p")
 opt.undofile = true
 
 opt.incsearch = true
