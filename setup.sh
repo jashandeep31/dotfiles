@@ -75,20 +75,20 @@ sudo apt install git -y
 # gh auth install
 sudo apt install gh -y
 
-sudo mkdir -p /home/ubuntu/.config
+mkdir -p /home/ubuntu/.config
 if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
   sudo rm -rf /home/ubuntu/.config/opencode
   sudo git clone https://github.com/jashandeep31/vibeongo-opencode-config.git /home/ubuntu/.config/opencode
 fi
 
 
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
 timeout 60s opencode || true
 EOF
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
 
-# sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 sudo apt clean
 rm -f ~/.bash_history 
 history -c
