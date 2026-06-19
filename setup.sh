@@ -1,17 +1,21 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "Welcome to Vibeongo Server"
 
 export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+export CI=1
 
 sudo apt  update -y
-sudo apt upgrade -y
+sudo apt upgrade -y \
+  -o Dpkg::Options::=--force-confdef \
+  -o Dpkg::Options::=--force-confold
 
-sudo apt install tmux
+sudo apt install -y tmux
  
 # Add Docker's official GPG key:
-sudo apt install ca-certificates curl
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -26,9 +30,9 @@ Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
-sudo apt update
+sudo apt update -y
 
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo usermod -aG docker ubuntu
 
@@ -53,16 +57,17 @@ npm -v # Should print "11.13.0".
 curl -fsSL https://opencode.ai/install | bash
 
 # claude code install 
-curl -fsSL https://claude.ai/install.sh | bash
+# curl -fsSL https://claude.ai/install.sh | bash
+timeout 120 bash -c "$(curl -fsSL https://claude.ai/install.sh)"
 
 # codex
 curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
 
 # neovim install
-sudo apt install neovim
+sudo apt install -y neovim
 
 # fzf install
-sudo apt install fzf
+sudo apt install -y fzf
 
 # git install
 sudo apt install git -y
@@ -70,19 +75,27 @@ sudo apt install git -y
 # gh auth install
 sudo apt install gh -y
 
-mkdir /home/ubuntu/.config/opencode
-git clone https://github.com/jashandeep31/vibeongo-opencode-config.git  /home/ubuntu/.config/opencode
+sudo mkdir -p /home/ubuntu/.config
+if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
+  sudo rm -rf /home/ubuntu/.config/opencode
+  sudo git clone https://github.com/jashandeep31/vibeongo-opencode-config.git /home/ubuntu/.config/opencode
+fi
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
 rm -f ~/.bash_history 
 history -c
 # Prevent this session from writing history on logout
 unset HISTFILE
 
-# I am using ./script.sh in root to run it 
-# so just clearing the file
-rm ./script.sh
+timeout 60s opencode || true
 
+rm -rf .ssh/known_hosts
+rm -rf .ssh/authorized_keys
 
+sudo apt clean
+
+sudo rm -rf /tmp/*
+sudo rm -rf /var/tmp/*
 
 # run as at end 
 #
