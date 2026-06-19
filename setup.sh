@@ -36,7 +36,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 sudo usermod -aG docker ubuntu
 
-
+sudo -u ubuntu -H bash <<'EOF'
 # Download and install nvm:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 
@@ -80,19 +80,20 @@ if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
   sudo rm -rf /home/ubuntu/.config/opencode
   sudo git clone https://github.com/jashandeep31/vibeongo-opencode-config.git /home/ubuntu/.config/opencode
 fi
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
+
+
+timeout 60s opencode || true
+EOF
+rm -rf .ssh/known_hosts
+rm -rf .ssh/authorized_keys
+
+# sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
+sudo apt clean
 rm -f ~/.bash_history 
 history -c
 # Prevent this session from writing history on logout
 unset HISTFILE
-
-timeout 60s opencode || true
-
-rm -rf .ssh/known_hosts
-rm -rf .ssh/authorized_keys
-
-sudo apt clean
 
 sudo rm -rf /tmp/*
 sudo rm -rf /var/tmp/*
