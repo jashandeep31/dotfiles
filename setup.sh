@@ -86,7 +86,7 @@ source ~/.bashrc
 
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
-timeout 60s opencode || true
+timeout 60s /home/ubuntu/.opencode/bin/opencode || true
 EOF
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
