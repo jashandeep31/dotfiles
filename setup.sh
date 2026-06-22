@@ -82,6 +82,8 @@ if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
 fi
 
 
+source ~/.bashrc
+
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
 timeout 60s opencode || true
