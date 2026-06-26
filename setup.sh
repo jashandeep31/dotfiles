@@ -13,7 +13,8 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confold
 
 sudo apt install -y tmux
- 
+
+sudo apt install -y build-essential
 # Add Docker's official GPG key:
 sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -86,9 +87,9 @@ source ~/.bashrc
 
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
-mkdir /home/ubuntu/code
+mkdir -p /home/ubuntu/code
 
-timeout 60s /home/ubuntu/.opencode/bin/opencode || true
+timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
 
 EOF
 
@@ -98,14 +99,14 @@ BINARY_PATH="/usr/local/bin/$APP"
 echo "Installing $APP..."
 
 # Download binary
-sudo curl -# -L  https://download.vibeongo.com/vibeongo -o "$BINARY_PATH"
+sudo curl -f# -L https://download.vibeongo.com/vibeongo -o "$BINARY_PATH"
 
 # Make executable
 
-sudo chown $USER "$BINARY_PATH"   # user can overwrite it
+sudo chown ubuntu:ubuntu "$BINARY_PATH"   # ubuntu can overwrite it
 sudo chmod +x "$BINARY_PATH"
 
-sudo tee /etc/systemd/system/vibeongo.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/vibeongo.service > /dev/null <<'SERVICE_EOF'
 [Unit]
 Description=Vibeongo Service
 After=network.target
@@ -124,14 +125,12 @@ Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
 
 [Install]
 WantedBy=multi-user.target
+SERVICE_EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable vibeongo
 sudo systemctl start vibeongo
 
-
-
-EOF
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
 
