@@ -90,6 +90,7 @@ mkdir /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode || true
 
+EOF
 
 APP="vibeongo"
 BINARY_PATH="/usr/local/bin/$APP"
@@ -123,7 +124,6 @@ Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
 
 [Install]
 WantedBy=multi-user.target
-EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable vibeongo
