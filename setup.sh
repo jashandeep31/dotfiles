@@ -89,6 +89,48 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 mkdir /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode || true
+
+
+APP="vibeongo"
+BINARY_PATH="/usr/local/bin/$APP"
+
+echo "Installing $APP..."
+
+# Download binary
+sudo curl -# -L  https://download.vibeongo.com/vibeongo -o "$BINARY_PATH"
+
+# Make executable
+
+sudo chown $USER "$BINARY_PATH"   # user can overwrite it
+sudo chmod +x "$BINARY_PATH"
+
+sudo tee /etc/systemd/system/vibeongo.service > /dev/null <<EOF
+[Unit]
+Description=Vibeongo Service
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Environment="HOME=/home/ubuntu"
+ExecStart=/usr/local/bin/vibeongo serve
+Restart=always
+RestartSec=3
+
+Environment=TERM=xterm-256color
+Environment=COLORTERM=truecolor
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable vibeongo
+sudo systemctl start vibeongo
+
+
+
 EOF
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
