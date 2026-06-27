@@ -93,40 +93,6 @@ timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
 
 EOF
 
-APP="vibeongo"
-BINARY_PATH="/usr/local/bin/$APP"
-
-echo "Installing $APP..."
-
-# Download binary
-sudo curl -f# -L https://download.vibeongo.com/vibeongo -o "$BINARY_PATH"
-
-# Make executable
-
-sudo chown ubuntu:ubuntu "$BINARY_PATH"   # ubuntu can overwrite it
-sudo chmod +x "$BINARY_PATH"
-
-sudo tee /etc/systemd/system/vibeongo.service > /dev/null <<'SERVICE_EOF'
-[Unit]
-Description=Vibeongo Service
-After=network.target
-
-[Service]
-Type=simple
-User=ubuntu
-Environment="HOME=/home/ubuntu"
-ExecStart=/usr/local/bin/vibeongo serve
-Restart=always
-RestartSec=3
-
-Environment=TERM=xterm-256color
-Environment=COLORTERM=truecolor
-Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
-
-[Install]
-WantedBy=multi-user.target
-SERVICE_EOF
-
 sudo systemctl daemon-reload
 sudo systemctl enable vibeongo
 sudo systemctl start vibeongo
@@ -156,3 +122,42 @@ sudo rm -rf /var/tmp/*
 # sudo rm -rf /var/tmp/*
 #
 # sudo apt clean
+#
+#
+#
+#
+# 
+# APP="vibeongo"
+# BINARY_PATH="/usr/local/bin/$APP"
+#
+# echo "Installing $APP..."
+#
+# # Download binary
+# sudo curl -f# -L https://download.vibeongo.com/vibeongo -o "$BINARY_PATH"
+#
+# # Make executable
+#
+# sudo chown ubuntu:ubuntu "$BINARY_PATH"   # ubuntu can overwrite it
+# sudo chmod +x "$BINARY_PATH"
+#
+# sudo tee /etc/systemd/system/vibeongo.service > /dev/null <<'SERVICE_EOF'
+# [Unit]
+# Description=Vibeongo Service
+# After=network.target
+#
+# [Service]
+# Type=simple
+# User=ubuntu
+# Environment="HOME=/home/ubuntu"
+# ExecStart=/usr/local/bin/vibeongo serve
+# Restart=always
+# RestartSec=3
+#
+# Environment=TERM=xterm-256color
+# Environment=COLORTERM=truecolor
+# Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
+#
+# [Install]
+# WantedBy=multi-user.target
+# SERVICE_EOF
+#
