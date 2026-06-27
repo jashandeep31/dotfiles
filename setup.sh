@@ -82,6 +82,7 @@ if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
   sudo git clone https://github.com/jashandeep31/vibeongo-opencode-config.git /home/ubuntu/.config/opencode
 fi
 
+npm i -g t3@nightly
 
 source ~/.bashrc
 
@@ -93,14 +94,37 @@ timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
 
 EOF
 
+
+
+
+# Setting up the opencode server
+mkdir -p /home/ubuntu/.t3/userdata
+touch /home/ubuntu/.t3/userdata/settings.json 
+cat > /home/ubuntu/.t3/userdata/settings.json << 'SETTINGS'
+{
+  "providerInstances": {
+    "opencode": {
+      "driver": "opencode",
+      "enabled": true,
+      "config": {
+        "enabled": true,
+        "binaryPath": "opencode",
+        "serverUrl": "http://localhost:4096",
+        "serverPassword": "",
+        "customModels": []
+      }
+    }
+  }
+}
+SETTINGS
+
+
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
 
 sudo apt clean
 rm -f ~/.bash_history 
 history -c
-# Prevent this session from writing history on logout
-unset HISTFILE
 
 sudo rm -rf /tmp/*
 sudo rm -rf /var/tmp/*
