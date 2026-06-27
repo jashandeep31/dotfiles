@@ -90,13 +90,8 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 mkdir -p /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
-timeout 60s  codex < /dev/null || true
 
 EOF
-
-sudo systemctl daemon-reload
-sudo systemctl enable vibeongo
-sudo systemctl start vibeongo
 
 rm -rf .ssh/known_hosts
 rm -rf .ssh/authorized_keys
