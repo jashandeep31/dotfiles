@@ -14,7 +14,7 @@ sudo apt upgrade -y \
 
 sudo apt install -y tmux
 
-sudo apt - y update
+sudo apt -y update
 sudo apt install -y build-essential
 # Add Docker's official GPG key:
 sudo apt install -y ca-certificates curl
@@ -95,29 +95,6 @@ timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
 
 EOF
 
-
-
-
-# Setting up the opencode server
-mkdir -p /home/ubuntu/.t3/userdata
-touch /home/ubuntu/.t3/userdata/settings.json 
-cat > /home/ubuntu/.t3/userdata/settings.json << 'SETTINGS'
-{
-  "providerInstances": {
-    "opencode": {
-      "driver": "opencode",
-      "enabled": true,
-      "config": {
-        "enabled": true,
-        "binaryPath": "opencode",
-        "serverUrl": "http://localhost:4096",
-        "serverPassword": "",
-        "customModels": []
-      }
-    }
-  }
-}
-SETTINGS
 
 
 rm -rf .ssh/known_hosts
