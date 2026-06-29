@@ -14,6 +14,7 @@ sudo apt upgrade -y \
 
 sudo apt install -y tmux
 
+sudo apt - y update
 sudo apt install -y build-essential
 # Add Docker's official GPG key:
 sudo apt install -y ca-certificates curl
