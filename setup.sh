@@ -12,14 +12,15 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confdef \
   -o Dpkg::Options::=--force-confold
 
-sudo apt install -y tmux
-sudo apt install -y mosh
-curl -fsSL https://getmoshi.app/install.sh | sh
+sudo apt install -y build-essential ca-certificates curl tmux mosh
+
+moshi_installer="$(mktemp)"
+curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 https://getmoshi.app/install.sh -o "$moshi_installer"
+sh "$moshi_installer"
+rm -f "$moshi_installer"
 
 sudo apt -y update
-sudo apt install -y build-essential
 # Add Docker's official GPG key:
-sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
