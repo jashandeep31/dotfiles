@@ -12,9 +12,9 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confdef \
   -o Dpkg::Options::=--force-confold
 
-sudo apt install -y build-essential ca-certificates curl tmux mosh
-
 sudo apt -y update
+sudo apt install -y tmux build-essential curl ca-certificates
+
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
