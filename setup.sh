@@ -91,10 +91,7 @@ mkdir -p /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
 
-
 EOF
-
-curl -fsSL https://getmoshi.app/install.sh | sh
 
 
 
