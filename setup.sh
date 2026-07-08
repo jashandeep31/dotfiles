@@ -61,7 +61,8 @@ curl -fsSL https://opencode.ai/install | bash
 timeout 120 bash -c "$(curl -fsSL https://claude.ai/install.sh)"
 
 # codex
-curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+# curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+npm install -g @openai/codex
 
 # neovim install
 sudo apt install -y neovim
