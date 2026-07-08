@@ -13,6 +13,8 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confold
 
 sudo apt install -y tmux
+sudo apt install -y mosh
+curl -fsSL https://getmoshi.app/install.sh | sh
 
 sudo apt -y update
 sudo apt install -y build-essential
