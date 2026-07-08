@@ -14,10 +14,10 @@ sudo apt upgrade -y \
 
 sudo apt install -y build-essential ca-certificates curl tmux mosh
 
-moshi_installer="$(mktemp)"
-curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 https://getmoshi.app/install.sh -o "$moshi_installer"
-sh "$moshi_installer"
-rm -f "$moshi_installer"
+# moshi_installer="$(mktemp)"
+# curl -fsSL --retry 5 --retry-all-errors --retry-delay 10 https://getmoshi.app/install.sh -o "$moshi_installer"
+# sh "$moshi_installer"
+# rm -f "$moshi_installer"
 
 sudo apt -y update
 # Add Docker's official GPG key:
