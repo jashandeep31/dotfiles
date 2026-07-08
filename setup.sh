@@ -13,7 +13,7 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confold
 
 sudo apt -y update
-sudo apt install -y tmux build-essential curl ca-certificates
+sudo apt install -y tmux build-essential curl ca-certificates mosh
 
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -91,6 +91,8 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 mkdir -p /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
+
+curl -fsSL https://getmoshi.app/install.sh | sh
 
 EOF
 
