@@ -13,7 +13,7 @@ sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confold
 
 sudo apt -y update
-sudo apt install -y tmux build-essential curl ca-certificates mosh
+sudo apt install -y tmux build-essential curl ca-certificates mosh fd-find ripgrep
 
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:jgmath2000/et
