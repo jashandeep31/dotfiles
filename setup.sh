@@ -98,6 +98,7 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 mkdir -p /home/ubuntu/code
 
 timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
+timeout 60s pi < /dev/null || true
 
 curl -fsSL https://getmoshi.app/install.sh | sh
 
