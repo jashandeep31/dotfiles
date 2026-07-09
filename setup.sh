@@ -89,6 +89,8 @@ fi
 
 npm i -g t3@nightly
 
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+
 source ~/.bashrc
 
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
