@@ -15,6 +15,11 @@ sudo apt upgrade -y \
 sudo apt -y update
 sudo apt install -y tmux build-essential curl ca-certificates mosh
 
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:jgmath2000/et
+sudo apt-get -y update
+sudo apt-get -y install et
+
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
