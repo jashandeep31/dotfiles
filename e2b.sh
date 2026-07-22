@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "Welcome to Vibeongo Server"
+echo "Welcome to Vibeongo Server!"
 
 export DEBIAN_FRONTEND=noninteractive
 
