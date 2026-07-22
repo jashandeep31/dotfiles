@@ -4,21 +4,11 @@ set -euo pipefail
 echo "Welcome to Vibeongo Server"
 
 export DEBIAN_FRONTEND=noninteractive
-export NEEDRESTART_MODE=a
-export CI=1
-
-sudo apt  update -y
-sudo apt upgrade -y \
-  -o Dpkg::Options::=--force-confdef \
-  -o Dpkg::Options::=--force-confold
 
 sudo apt -y update
-sudo apt install -y tmux build-essential curl ca-certificates mosh fd-find ripgrep
+sudo apt install -y tmux curl ca-certificates mosh fd-find ripgrep
 
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:jgmath2000/et
-sudo apt-get -y update
-sudo apt-get -y install et
 
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
