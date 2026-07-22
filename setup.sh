@@ -7,6 +7,11 @@ export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 export CI=1
 
+echo "ID=$ID"
+echo "VERSION_CODENAME=$VERSION_CODENAME"
+. /etc/os-release
+cat /etc/os-release
+
 sudo apt  update -y
 sudo apt upgrade -y \
   -o Dpkg::Options::=--force-confdef \
