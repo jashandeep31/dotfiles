@@ -5,6 +5,8 @@ echo "Welcome to Vibeongo Server!"
 
 export DEBIAN_FRONTEND=noninteractive
 
+cat /etc/os-release
+
 sudo apt -y update
 sudo apt install -y tmux curl ca-certificates mosh fd-find ripgrep
 
