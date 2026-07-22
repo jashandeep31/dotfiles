@@ -1,0 +1,8 @@
+vibengoplan.md
+# Neovim
+nvim/.undo/
+nvim/.luac.cache
+*.swp
+*.swo
+lazy-lock.json
+.DS_Store
