@@ -8,9 +8,10 @@ export DEBIAN_FRONTEND=noninteractive
 cat /etc/os-release
 
 sudo apt -y update
-sudo apt install -y tmux curl ca-certificates mosh fd-find ripgrep
+sudo apt install -y tmux build-essential curl ca-certificates mosh fd-find ripgrep
 
 sudo apt-get install -y software-properties-common
+
 
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
