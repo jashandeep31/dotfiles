@@ -58,8 +58,15 @@ node -v # Should print "v24.16.0".
 npm -v # Should print "11.13.0".
 
 
+# agent browser for debugging
+npm install -g agent-browser
+agent-browser install --with-deps
+
 # opencode install
 curl -fsSL https://opencode.ai/install | bash
+
+# installing the opencode2
+npm install -g @opencode-ai/cli@beta
 
 # claude code install 
 # curl -fsSL https://claude.ai/install.sh | bash
@@ -87,7 +94,7 @@ if [ ! -d /home/ubuntu/.config/opencode/.git ]; then
   sudo git clone https://github.com/jashandeep31/vibeongo-opencode-config.git /home/ubuntu/.config/opencode
 fi
 
-npm i -g t3@nightly
+npm i -g t3
 
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
@@ -97,11 +104,12 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/opencode
 
 mkdir -p /home/ubuntu/code
 
-timeout 60s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
-timeout 60s pi < /dev/null || true
+timeout 10s /home/ubuntu/.opencode/bin/opencode < /dev/null || true
+timeout 10s pi < /dev/null || true
 
 curl -fsSL https://getmoshi.app/install.sh | sh
 
+curl -fsSL https://fx.sh/setup.sh | bash
 EOF
 
 
@@ -112,7 +120,7 @@ rm -rf .ssh/authorized_keys
 sudo apt clean
 rm -f ~/.bash_history 
 history -c
+rm -rf ./setup.sh
 
 sudo rm -rf /tmp/*
 sudo rm -rf /var/tmp/*
-
